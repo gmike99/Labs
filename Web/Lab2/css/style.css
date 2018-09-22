@@ -1,0 +1,122 @@
+body {
+    margin: 0;
+}
+a {
+    color: #000;
+    text-decoration: none;
+}
+a:hover {
+    color: #000;
+    text-decoration: none;
+}
+img {
+    width: 100%;
+    height: 100%;
+}
+
+header {
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: #162232;
+}
+nav {
+    vertical-align: top;
+    display: inline-block;
+    width: fit-content;
+    margin: auto;
+    z-index: 2;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    display: block;
+    height: 50px;
+}
+nav ul li {
+    text-align: center;
+    display: inline-block;
+    padding: 0;
+}
+nav ul li a {
+    width: 120px;
+    display: inline-block;
+    padding: 15px 0;
+    background: #fff;
+    border: 2px solid transparent;
+}
+nav ul li a:hover {
+    color: #fff;
+    border: 2px solid #000;
+}
+.logo {
+    position: absolute;
+    float: right;
+    height: 100px;
+    width: 150px;
+    right: 150px;
+}
+
+
+.main {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.team-picture {
+    height: 100%;
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2 {
+    text-align: center;
+    margin: 0 0 30px;
+    text-transform: uppercase;
+}
+
+p {
+    font-family: Candara, serif;
+}
+
+.history {
+    height: 300px;
+    padding: 60px 30px;
+    background: #efefef;
+}
+
+.history .wrap p {
+    padding-top: 40px;
+}
+
+.history .wrap img {
+    float: right;
+    width: 400px;
+}
+
+.victory {
+    height: 300px;
+    padding: 60px 30px;
+    background: #efefef;
+}
+
+.victory .wrap p {
+    padding-top: 40px;
+}
+
+.victory .wrap img {
+    float: left;
+    width: 400px;
+}
+
+footer {
+    text-align: center;
+}
