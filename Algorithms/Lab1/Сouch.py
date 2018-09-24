@@ -1,4 +1,4 @@
-
+import timeit
 
 class Couch:
     width = 0
@@ -11,7 +11,17 @@ class Couch:
         self.length = length
 
 
+
+def wrapper(func, *args, **kwargs):
+    def wrapped():
+        return func(*args, **kwargs)
+    return wrapped
+
+
+
 def selection_sort(couches):
+    comparison_count = 0
+    swap_count = 0
 
     for i in range(len(couches)):
 
@@ -19,13 +29,29 @@ def selection_sort(couches):
 
         for j in range(i+1, len(couches)):
             if couches[max_idx].width < couches[j].width:
+                comparison_count += 1
                 max_idx = j
-
+        
         couches[max_idx], couches[i] = couches[i], couches[max_idx]
+        if max_idx != i:
+            swap_count += 1
+
+
+    print('Selection sort')
+    print('Comparison count: {}\n Swap count: {}\n'.format(comparison_count, swap_count))
+    for couch in couches:
+        print(couch.width, end=" ")
+        
+        
 
 
 def merge_sort(couches):
+
+    comparison_count = 0
+    swap_count = 0
+
     if len(couches) > 1:
+        comparison_count += 1
         m = len(couches) // 2
         lefthalf = couches[:m]
         righthalf = couches[m:]
@@ -38,23 +64,42 @@ def merge_sort(couches):
         k = 0
 
         while i < len(lefthalf) and j < len(righthalf):
+            comparison_count +=2
             if lefthalf[i].length < righthalf[j].length:
+                comparison_count += 1
                 couches[k] = lefthalf[i]
+                if k != i:
+                    swap_count +=1
                 i += 1
             else:
                 couches[k] = righthalf[j]
+                if k != j:
+                    swap_count += 1
                 j += 1
             k += 1
 
         while i < len(lefthalf):
+            comparison_count += 1
             couches[k] = lefthalf[i]
+            if k != i:
+                swap_count += 1
             i += 1
             k += 1
 
         while j < len(righthalf):
+            comparison_count += 1
             couches[k] = righthalf[j]
+            if k != j:
+                swap_count += 1
             j += 1
             k += 1
+
+    print('Merge sort')
+    print('Comparison count: {}\n Swap count: {}\n'.format(comparison_count, swap_count))
+    for couch in couches:
+        print(couch.length, end=" ")
+
+
 
 
 if __name__ == "__main__":
@@ -80,12 +125,10 @@ if __name__ == "__main__":
     couches_list.append(couch8)
     couches_list.append(couch9)
 
-    for couch in couches_list:
-        print(couch.length)
-    print('---------------------------------')
+    # wrapped = wrapper(selection_sort, couches_list)
+    # timeit.timeit(wrapped, number=1)
+    #wfejbveio;
 
-    merge_sort(couches_list)
-    # selection_sort(couches_list)
+    wrapped = wrapper(merge_sort, couches_list)
+    timeit.timeit(wrapped, number=1)
 
-    for couch in couches_list:
-        print(couch.length) 
