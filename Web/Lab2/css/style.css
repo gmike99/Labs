@@ -1,59 +1,60 @@
 body {
     margin: 0;
 }
-a {
-    color: #000;
-    text-decoration: none;
-}
-a:hover {
-    background: #162232;
-    /* background-color: #022554; */
-    text-decoration: none;
-}
+
 img {
     width: 100%;
     height: 100%;
 }
 
 header {
-    text-align: center;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 50px;
-    background: #022554;
-    /* background: #162232; */
+    height: 60px;
+    background-color: black;
 }
+  
 nav {
-    vertical-align: top;
-    display: inline-block;
-    width: fit-content;
+    display: block;
+    width: 80%;
     margin: auto;
     z-index: 2;
 }
 
 nav ul {
-    list-style-type: none;
     margin: 0;
     padding: 0;
+    text-align: left;
 
-    display: block;
-    height: 50px;
+    display: inline-block;
+    height: 80px;
 }
 nav ul li {
     text-align: center;
     display: inline-block;
     padding: 0;
+    margin: 0;
+    height: 100%;
 }
 nav ul li a {
+    text-decoration: none;
     color: white;
     width: 120px;
     display: inline-block;
-    padding: 15px 0;
-    background: #162232;
+    padding: 20px 0;
+    border-bottom: 2px solid transparent;
 }
+
+#burger {
+    /* display: none; */
+}
+
 nav ul li a:hover {
+    background-color: #162232;
+    border-bottom: 2px solid #d2003c;
+
 }
 .logo {
     position: absolute;
@@ -70,8 +71,9 @@ nav ul li a:hover {
 }
 
 .team-picture {
-    height: 670px;
-    width: 100%;
+    margin-top: 50px;
+    height: 500px;
+    width: 80%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -87,7 +89,7 @@ p {
     font-family: Candara, serif;
 }
 
-.history {
+/* .history {
     height: 300px;
     padding: 60px 30px;
     background: #efefef;
@@ -103,7 +105,7 @@ p {
 }
 
 .victory {
-    height: 300px;
+    height: fit-content;
     padding: 60px 30px;
     background: #efefef;
 }
@@ -111,12 +113,13 @@ p {
 .victory .wrap p {
     padding-top: 40px;
 }
-
+*/
 .victory .wrap img {
     float: left;
     width: 400px;
-}
+} 
 
 footer {
+    margin-top: 50px;
     text-align: center;
 }

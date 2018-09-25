@@ -21,83 +21,72 @@ def wrapper(func, *args, **kwargs):
 
 def selection_sort(couches):
     comparison_count = 0
-    swap_count = 0
+    append_count = 0
 
-    for i in range(len(couches)):
+    for left_idx in range(len(couches)):
 
-        max_idx = i
+        max_idx = left_idx
 
-        for j in range(i+1, len(couches)):
-            if couches[max_idx].width < couches[j].width:
+        for right_idx in range(left_idx+1, len(couches)):
+            if couches[max_idx].width < couches[right_idx].width:
                 comparison_count += 1
-                max_idx = j
+                max_idx = right_idx
         
-        couches[max_idx], couches[i] = couches[i], couches[max_idx]
-        if max_idx != i:
-            swap_count += 1
+        couches[max_idx], couches[left_idx] = couches[left_idx], couches[max_idx]
+        if max_idx != left_idx:
+            append_count += 1
 
 
     print('Selection sort')
-    print('Comparison count: {}\n Swap count: {}\n'.format(comparison_count, swap_count))
+    print('Comparison count: {}\n Swap count: {}\n'.format(comparison_count, append_count))
     for couch in couches:
         print(couch.width, end=" ")
         
         
-
-
 def merge_sort(couches):
 
-    comparison_count = 0
-    swap_count = 0
-
+    res = []
+    
     if len(couches) > 1:
-        comparison_count += 1
-        m = len(couches) // 2
-        lefthalf = couches[:m]
-        righthalf = couches[m:]
+        # comparison_count += 1
+        middle_idx = len(couches) // 2
 
-        merge_sort(lefthalf)
-        merge_sort(righthalf)
+        lefthalf = []
+        righthalf = []
 
-        i = 0
-        j = 0
-        k = 0
+        lefthalf = couches[:middle_idx]
+        righthalf = couches[middle_idx:]
 
-        while i < len(lefthalf) and j < len(righthalf):
-            comparison_count +=2
-            if lefthalf[i].length < righthalf[j].length:
-                comparison_count += 1
-                couches[k] = lefthalf[i]
-                if k != i:
-                    swap_count +=1
-                i += 1
-            else:
-                couches[k] = righthalf[j]
-                if k != j:
-                    swap_count += 1
-                j += 1
-            k += 1
+        sorted_left = merge_sort(lefthalf)
+        sorted_right = merge_sort(righthalf)
 
-        while i < len(lefthalf):
-            comparison_count += 1
-            couches[k] = lefthalf[i]
-            if k != i:
-                swap_count += 1
-            i += 1
-            k += 1
+        res = merge(sorted_left, sorted_right)
+    else:
+        res = couches
 
-        while j < len(righthalf):
-            comparison_count += 1
-            couches[k] = righthalf[j]
-            if k != j:
-                swap_count += 1
-            j += 1
-            k += 1
+    return res
 
-    print('Merge sort')
-    print('Comparison count: {}\n Swap count: {}\n'.format(comparison_count, swap_count))
-    for couch in couches:
-        print(couch.length, end=" ")
+
+def merge(lefthalf, righthalf):
+
+    res = []
+    left_idx = 0
+    right_idx = 0   
+
+    while left_idx < len(lefthalf) and right_idx < len(righthalf):
+        if lefthalf[left_idx].length < righthalf[right_idx].length:
+            res.append(lefthalf[left_idx])
+            left_idx += 1
+            
+        else:
+            res.append(righthalf[right_idx])
+            right_idx +=  1
+
+    res.extend(lefthalf[left_idx:])
+
+    res.extend(righthalf[right_idx:])
+
+    return res
 
 
 
@@ -125,10 +114,8 @@ if __name__ == "__main__":
     couches_list.append(couch8)
     couches_list.append(couch9)
 
-    # wrapped = wrapper(selection_sort, couches_list)
-    # timeit.timeit(wrapped, number=1)
-    #wfejbveio;
 
-    wrapped = wrapper(merge_sort, couches_list)
-    timeit.timeit(wrapped, number=1)
-
+    sorted = merge_sort(couches_list)
+    for i in range(len(sorted)):
+        print(sorted[i].length)
+    
