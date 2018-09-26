@@ -79,6 +79,8 @@ h2 {
 }
 
 p {
+    line-height: 1.5em;
+    text-indent: 20px;
     font-family: Candara, serif;
 }
 
@@ -91,10 +93,13 @@ p {
 }
 
 .history img {
-    width: 385px;
+    width: 300px;
     height: 255px;
     margin-right: 50px;
+    margin-left: 25px;
+    margin-bottom: 25px;
     float: right;
+    border-radius: 8%;
 }
 
 .history .wrap p {
@@ -107,7 +112,8 @@ p {
     height: 255px;
     float: left;
     margin-left: 50px;
-    padding-right: 25px; 
+    margin-right: 25px; 
+    border-radius: 8%;
 }
 
 .victory .wrap p {
