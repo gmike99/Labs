@@ -1,0 +1,145 @@
+body {
+    margin: 0;
+}
+
+@keyframes logo-fadeIn {
+    from {opacity: 0;
+        margin-right: 40px;}
+    to {opacity: 1;
+        margin-right: 0px;}
+}
+
+@keyframes menu-reveal {
+    from {padding-top: 0;}
+    tp {color: 20px;}
+}
+
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #030B16;
+}
+  
+nav {
+    display: block;
+    width: 80%;
+    margin: auto;
+    z-index: 2;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+
+    display: inline-block;
+    height: 80px;
+}
+
+nav ul li {
+    text-align: center;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    width: 120px;
+    display: inline-block;
+    padding: 20px 0;
+    border-bottom: 2px solid transparent;
+    animation: menu-reveal 1.5s;
+}
+
+nav ul li a:hover {
+    background-color: #162232;
+    border-bottom: 2px solid #ae1e18;   
+}   
+
+.logo-top {
+    margin-top: 5px;
+    width: 180px;
+    height: 50px;
+    float: right;
+    animation: logo-fadeIn 1.5s;
+}
+
+.main {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.team-picture {
+    margin-top: 60px;
+    height: 700px;
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2 {
+    text-align: center;
+    margin: 0 0 30px;
+    text-transform: uppercase;
+    padding-top: 80px;
+}
+
+p {
+    line-height: 1.5em;
+    text-indent: 20px;
+    font-family: Candara, serif;
+}
+
+
+.history, .victory {
+    display: block;
+    height: 600px;
+    width: 100%;
+    background-color: #efefef;
+}
+
+.history img {
+    width: 300px;
+    height: 255px;
+    margin-right: 50px;
+    margin-left: 25px;
+    margin-bottom: 25px;
+    float: right;
+    border-radius: 8%;
+}
+
+.history .wrap p {
+    margin-left: 50px;
+    padding-right: 50px;
+}
+
+.victory img {
+    width: 385px;
+    height: 255px;
+    float: left;
+    margin-left: 50px;
+    margin-right: 25px; 
+    border-radius: 8%;
+}
+
+.victory .wrap p {
+    padding-right: 50px;
+    padding-left: 50px; 
+}
+
+footer {
+    background-color: #162232; 
+    color: white;
+    padding: 20px 0 20px 0;
+    height: 50px;
+    width: 100%;
+    text-align: center;
+}
