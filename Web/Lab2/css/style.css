@@ -15,6 +15,7 @@ header {
 nav {
     display: block;
     width: 80%;
+    height: 80px;
     margin: auto;
     z-index: 2;
 }
@@ -25,7 +26,6 @@ nav ul {
     text-align: left;
 
     display: inline-block;
-    height: 80px;
 }
 
 nav ul li {
@@ -50,6 +50,26 @@ nav ul li a:hover {
     border-bottom: 2px solid #ae1e18;   
 }   
 
+nav .mnu2 {
+    position: relative; 
+}
+nav .mnu2 ul {
+    position: absolute; top:60px; left: 0;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+nav .mnu2 ul li {
+    display: block;
+}
+
+nav .mnu2:hover ul, nav .mnu2 ul:hover {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 .logo-top {
     margin-top: 5px;
     width: 180px;
@@ -60,6 +80,14 @@ nav ul li a:hover {
 .main {
     margin-left: auto;
     margin-right: auto;
+}
+
+#options {
+    display: none;
+}
+
+#burger:hover + #options {
+    display: block;
 }
 
 .team-picture {
