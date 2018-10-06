@@ -52,12 +52,6 @@ def gauss_method(V, P):
     return numpy.linalg.solve(T, B)
                 
                     
-
-
-    
-        
-
-
 if __name__ == '__main__':
     print('Hello World')
     ans = gauss_method(V, P)
