@@ -1,7 +1,7 @@
 body {
     margin: 0;
 }
-
+  
 @keyframes logo-fadeIn {
     from {opacity: 0;}
     to {opacity: 1;}
@@ -70,6 +70,26 @@ nav ul li a:hover {
     border-bottom: 2px solid #ae1e18;   
 }   
 
+nav .menu-matches {
+    position: relative; 
+}
+nav .menu-matches ul {
+    position: absolute; top:60px; left: 0;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+nav .menu-matches ul li {
+    display: block;
+}
+
+nav .menu-matches:hover ul, nav .menu-matches ul:hover {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 .logo-top {
     margin-top: 5px;
     width: 180px;
@@ -89,9 +109,6 @@ nav ul li a:hover {
 
     display: none;
 }
-
-
-
 
 .main {
     margin-left: auto;
@@ -126,6 +143,7 @@ p {
 
 .history {
     padding: 90px 0;
+    background-color: #efefef
 }
 .history img {
     width: 300px;
@@ -144,7 +162,6 @@ p {
 
 .victory {
     display: block;
-    /*height: 600px;*/
     width: 100%;
     padding: 60px 0;
     background-color: #efefef;

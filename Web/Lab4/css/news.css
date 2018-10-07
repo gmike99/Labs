@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    background-color: #efefef
 }
   
 @keyframes logo-fadeIn {
@@ -111,59 +110,25 @@ nav .menu-matches:hover ul, nav .menu-matches ul:hover {
     display: none;
 }
 
-
-p {
-    line-height: 1.5em;
-    text-indent: 20px;
-    font-family: Candara, serif;
-}
-
-.main, .write-comment {
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
-}
-
-.main {
-    margin-top: 80px;
-}
-
-.fan-comment {
-    padding-top: 20px;
-    border-bottom: 2px solid #030B16;
-}
-
-.username {
-    float: right;
-    margin: 0 50px 0 0;
-    font-weight: bold;
-    font-size: 18px;
-    animation: comment-reveal 1.5s;
-}
-
-
-.comment-date {
-    font-size: 18px;
-    animation: comment-reveal 1.5s;
-}
-
-.write-comment {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-input[type="text"] {
-    width: 45%;
-    padding: 5px 5px 160px 5px;
+.news-image {
     vertical-align: top;
+    display: inline-block;
+    width: 300px; height: 240px;
+    margin-top: 30px;
+}
+.news-image{
+    width:100%;
+    height: auto;
+}
+.news-image img {
+    width:100%;
+    height: auto;
+    border-radius: 6%;
 }
 
-input[type="submit"] {
-    display: inline-block;
-    padding: 5px 70px;
-    margin-left: 10px;
-    margin-top: 155px;
-    
+.last-news {
+    margin-top: 60px;
+    background-color: #efefef
 }
 
 footer {
@@ -171,5 +136,5 @@ footer {
     color: white;
     padding: 20px 0 20px 0;
     width: 100%;
-    text-align: center;
+    text-align: center; 
 }

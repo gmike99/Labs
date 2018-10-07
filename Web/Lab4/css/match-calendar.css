@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: #efefef
+    background-color: #efefef;
 }
   
 @keyframes logo-fadeIn {
@@ -111,60 +111,24 @@ nav .menu-matches:hover ul, nav .menu-matches ul:hover {
     display: none;
 }
 
-
-p {
-    line-height: 1.5em;
-    text-indent: 20px;
-    font-family: Candara, serif;
+.main-calendar {
+    margin: 120px 0 80px 0;
 }
 
-.main, .write-comment {
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
+table {
+    border-collapse: collapse;
+    width: 100%;
 }
 
-.main {
-    margin-top: 80px;
+tr {
+    height: 30px;
+    text-align: center;
 }
 
-.fan-comment {
-    padding-top: 20px;
-    border-bottom: 2px solid #030B16;
+table, th, td {
+    border: 1px solid black;
 }
 
-.username {
-    float: right;
-    margin: 0 50px 0 0;
-    font-weight: bold;
-    font-size: 18px;
-    animation: comment-reveal 1.5s;
-}
-
-
-.comment-date {
-    font-size: 18px;
-    animation: comment-reveal 1.5s;
-}
-
-.write-comment {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-input[type="text"] {
-    width: 45%;
-    padding: 5px 5px 160px 5px;
-    vertical-align: top;
-}
-
-input[type="submit"] {
-    display: inline-block;
-    padding: 5px 70px;
-    margin-left: 10px;
-    margin-top: 155px;
-    
-}
 
 footer {
     background-color: #162232; 
