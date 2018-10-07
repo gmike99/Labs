@@ -111,6 +111,14 @@ nav .menu-matches:hover ul, nav .menu-matches ul:hover {
     display: none;
 }
 
+.main-contacts {
+    margin: 120px 0 80px 0;
+}
+
+.map-image img {
+    border-radius: 6%;
+}
+
 
 footer {
     background-color: #162232; 
