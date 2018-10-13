@@ -1,16 +1,17 @@
-import numpy 
+from numpy.linalg import solve as func
+from numpy import array
 
 p = 22
 k = 3
 s = 0.02 * k
 B = 0.02 * p
 
-V = numpy.array([[8.3, 2.62+s, 4.1, 1.9], 
+V = array([[8.3, 2.62+s, 4.1, 1.9], 
         [3.92, 8.45, 7.78-s, 2.46], 
         [3.77, 7.21+s, 8.04, 2.28], 
         [2.21, 6.65-s, 1.69, 6.69]])
 
-P = numpy.array([-10.65+B, 12.21, 15.45-B, -8.35])
+P = array([-10.65+B, 12.21, 15.45-B, -8.35])
 
 def gauss_method(V, P):
     no_of_rows = len(V) 
@@ -49,10 +50,9 @@ def gauss_method(V, P):
         else:
             value = V[d][k]; V[d][k] = V[d][w]; V[d][w] = value
     
-    return numpy.linalg.solve(T, B)
+    return func(T, B)
                 
                     
 if __name__ == '__main__':
-    print('Hello World')
     ans = gauss_method(V, P)
     print(ans)

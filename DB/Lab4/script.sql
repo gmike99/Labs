@@ -36,7 +36,7 @@ LEFT JOIN laptop ON product.model = laptop.model
 LEFT JOIN printer ON product.model = printer.model
 GROUP BY maker;
 /**9**/
-SELECT * FROM ships, classes WHERE (
+SELECT name FROM ships, classes WHERE (
 (CASE numGuns WHEN 9 THEN 1 ELSE 0 END)+
 (CASE bore WHEN 16 THEN 1 ELSE 0 END)+
 (CASE displacement WHEN 46000 THEN 1 ELSE 0 END)+
