@@ -1,42 +1,63 @@
 from merge_sort import merge_sort as msort
 
-def get_zero_num(mlist):
-    num_zeroes = 0
-    for index in range(len(mlist)):
-        if mlist[index] == 0:
-            num_zeroes += 1
-        else:
-            break
-    return num_zeroes
-
-def remove_duplicates(numbers):
-    newlist = []
-    for number in numbers:
-        if number == 0:
-            newlist.append(0)
-        if number not in newlist:
-           newlist.append(number)
-    return newlist
 
 if __name__=="__main__":
 
     with open('lngpok.in') as file_obj:
-        num_list = file_obj.readline().split()
+        arr = file_obj.readline().split()
 
+   
     #converting to int
-    num_list = list(map(int, num_list))
+    arr = list(map(int, arr))
 
-    num_list = msort(num_list)
-
-    num_zeroes = get_zero_num(num_list)
-    num_list = remove_duplicates(num_list)
-
+    #finding the number of zeroes
+    zeroes = sum(num == 0 for num in arr)
     
+    #removing duplicates
+    arr = list(set(arr))
 
-    print(num_list)
+    #merge sorting array
+    arr = msort(arr)
+    
+    try:
+        arr.remove(0)
+    except ValueError:
+        pass
+
+    print(arr)
+    print(zeroes)
+
     max_combo = 0
+    for i in range(len(arr)):
+        last_no = 0
+        current_combo = 0
 
-    current_list = []
+        zero_idx = zeroes
+        idx = 0
+
+        while idx < len(arr):
+            if arr[idx] == last_no+1:
+                current_combo += 1
+            elif idx == 0:
+                current_combo += 1
+            else:
+                if zero_idx > 0:
+                    last_no+=1
+                    zero_idx-=1
+                    current_combo += 1
+                    continue
+                else:
+                    zero_idx = zeroes
+                    current_combo = 1
+            max_combo = max(max_combo, current_combo)
+            last_no = arr[idx]  
+            idx+=1
+        current_combo+=zero_idx
+        max_combo = max(max_combo, current_combo)
+        arr.pop(0)
+
+    print(max_combo)
+
 
     
 
