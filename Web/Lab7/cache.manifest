@@ -1,0 +1,20 @@
+CACHE MANIFEST
+
+CACHE:
+index.html
+error.html
+news.html
+css/style.css
+css/media.css
+css/news.css
+img/team-pic.jpeg
+img/history.jpg
+img/main-bg.jpg
+lib/bootstrap-grid.min.css
+
+
+NETWORK:
+#download all unsaved files
+
+FALLBACK:
+/ /error.html
