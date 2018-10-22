@@ -1,4 +1,6 @@
 *.exe
-*.vscode
+*.vscode/
 venv/
-__pycache__
+__pycache__/
+*.iml/
+target/

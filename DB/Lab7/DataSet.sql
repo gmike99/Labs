@@ -63,11 +63,12 @@ INSERT INTO add_company VALUES
 
 
 CREATE TABLE playerscompanies (
-player_id INT NOT NULL, 
+last_name VARCHAR(30) NOT NULL,
+first_name VARCHAR(30) NOT NULL, 
 company_name VARCHAR(50) NOT NULL,
-FOREIGN KEY (player_id) REFERENCES football_player (player_id),
+FOREIGN KEY (last_name, first_name) REFERENCES football_player (last_name, first_name),
 FOREIGN KEY (company_name) REFERENCES add_company (company_name),
-PRIMARY KEY(player_id, company_name));
+PRIMARY KEY(last_name, first_name, company_name));
 
 
 DELIMITER //
@@ -177,9 +178,5 @@ END //
 
 DELIMITER ;
 
-alter table football_player add column player_id int;
-
-alter table football_player add unique(player_id);
-
-drop table playerscompanies;-- CALL update_football_club('Popov', 'Daniil');
+-- CALL update_football_club('Popov', 'Daniil');
 
