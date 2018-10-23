@@ -3,6 +3,8 @@ function isOnline() {
     return window.navigator.onLine;
 };
 
+console.log('this is admin');
+
 function saveData(obj) {
     localStorage.setItem('news', JSON.stringify(obj));
     var retrievedObject = JSON.parse(localStorage.getItem('news'));

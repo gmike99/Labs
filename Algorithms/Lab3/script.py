@@ -51,6 +51,7 @@ def get_dist(edges, start):
     dist_to[start] = 0
 
     while set(visited) != set(vertices):
+        # choose unvisited node with smallest distance from start
         # TODO optimize -----------------------------------------
         current_node = start
         dist_copy = dist_to.copy()
@@ -59,6 +60,7 @@ def get_dist(edges, start):
             del dist_copy[current_node]
         # ---------------------------------------------------
 
+        # compare calculated dist to current dist
         working_edges = []
         for begin, end, weight in edges:
             if begin == current_node: working_edges.append(Edge(begin, end, weight))
@@ -109,5 +111,6 @@ def solve(file_name):
     
 if __name__=="__main__":
     res = solve('gamsrv.in')
+    print(res)
     maximum = max(res, key=lambda item: item[1])[1]
     print(maximum)

@@ -3,6 +3,8 @@ function isOnline() {
     return window.navigator.onLine;
 };
 
+console.log('this is common');
+
 var input = document.getElementById('comment-text-input');
 var commentSection = document.querySelector('.main .col-12');
 
@@ -11,10 +13,10 @@ function populateComment(commentTxt) {
     input = document.getElementById('comment-text-input');
     if (commentTxt === null) {
         console.log('commentText == null');
-        fanCommentText = input.value;
+        var fanCommentText = input.value;
     } else {
         console.log('commentText != null');
-        fanCommentText = commentTxt
+        var fanCommentText = commentTxt
     };
     
     if (fanCommentText === '') {
@@ -80,8 +82,6 @@ function populateComment(commentTxt) {
         input.style.border = '1px solid black';
     };
 };
-// var clickButton = document.getElementById('sbm-button');
-// clickButton.addEventListener("click", populateComment(), fals);
 
 function saveData(obj) {
     console.log('save data inside');
@@ -128,12 +128,3 @@ burger.onclick = function () {
         navigation.classList.add('hidden');
     }
 };
-
-
-
-
-
-var fanCommentText = null;
-
-
-
