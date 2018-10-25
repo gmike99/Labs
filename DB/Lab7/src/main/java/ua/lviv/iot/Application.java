@@ -5,7 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-import ua.lviv.iot.model.FootballClubEntity;
+import ua.lviv.iot.model.AddCompanyEntity;
 import ua.lviv.iot.model.FootballPlayerEntity;
 
 import java.sql.*;
@@ -44,7 +44,7 @@ public class Application {
 
     public static void main(String args[]) {
 
-        mSession = getSession();
+//        mSession = getSession();
 
         try {
             //This will load the MySQL driver, each DB has its own driver //
@@ -161,10 +161,10 @@ public class Application {
                 "Last Name", "First Name", "Years Of XP", "Player ID", "Club Name");
         for (Object obj : query.list()) {
             FootballPlayerEntity player = (FootballPlayerEntity) obj;
-            System.out.format("%3s %-12s %-12s->\n", player.getLastName(), player.getFirstName(),
+            System.out.format("%3s %-12s %-12s\n", player.getLastName(), player.getFirstName(),
                     player.getYearsOfExperience(), player.getPlayerId());
-            for (FootballClubEntity club : player.getC()) {
-                System.out.format("\t\t%s // %s\n", booky.getBookName(), booky.getAuthor());
+            for (AddCompanyEntity addCompanyEntity : player.getCompanies()) {
+                System.out.format("\t\t%s // %s\n", addCompanyEntity.getCompanyName());
             }
         }
 

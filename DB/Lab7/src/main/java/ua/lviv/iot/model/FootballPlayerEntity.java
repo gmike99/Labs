@@ -1,15 +1,19 @@
 package ua.lviv.iot.model;
 
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "football_player", schema = "lab6", catalog = "")
+@Table(name = "football_player", schema = "lab6")
 @IdClass(FootballPlayerEntityPK.class)
 public class FootballPlayerEntity {
     private String lastName;
     private String firstName;
     private Byte yearsOfExperience;
     private Integer playerId;
+    private List<AddCompanyEntity> companies;
+
 
     @Id
     @Column(name = "last_name")
@@ -51,6 +55,29 @@ public class FootballPlayerEntity {
         this.playerId = playerId;
     }
 
+
+    @ManyToMany(mappedBy = "players")
+    public List<AddCompanyEntity> getCompanies() {
+        return companies;
+    }
+
+    public void setCompanies(List<AddCompanyEntity> companies) {
+        this.companies = companies;
+    }
+
+
+    private FootballClubEntity clubByClub;
+
+    @ManyToOne
+    @JoinColumn(name = "club_name", referencedColumnName = "club_name", nullable = false)
+    public FootballClubEntity getClubByClub() {
+        return clubByClub;
+    }
+
+    public void setClubByClub(FootballClubEntity clubByClub) {
+        this.clubByClub = clubByClub;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,5 +101,14 @@ public class FootballPlayerEntity {
         result = 31 * result + (yearsOfExperience != null ? yearsOfExperience.hashCode() : 0);
         result = 31 * result + (playerId != null ? playerId.hashCode() : 0);
         return result;
+    }
+
+    public void addAddCompanyEntity(AddCompanyEntity addCompanyEntity){
+        if(!getCompanies().contains(addCompanyEntity)){
+            getCompanies().add(addCompanyEntity);
+        }
+        if(!addCompanyEntity.getPlayers().contains(this)){
+            addCompanyEntity.getPlayers().add(this);
+        }
     }
 }

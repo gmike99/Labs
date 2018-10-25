@@ -1,14 +1,16 @@
 package ua.lviv.iot.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "football_club", schema = "lab6", catalog = "")
+@Table(name = "football_club", schema = "lab6")
 public class FootballClubEntity {
     private String clubName;
     private String clubOwnerName;
     private String coachName;
     private String country;
+    private List<FootballPlayerEntity> playersByClub;
 
     @Id
     @Column(name = "club_name")
@@ -48,6 +50,15 @@ public class FootballClubEntity {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    @OneToMany(mappedBy = "clubByClub")
+    public List<FootballPlayerEntity> getPlayersByClub() {
+        return playersByClub;
+    }
+
+    public void setPlayersByClub(List<FootballPlayerEntity> playersByClub) {
+        this.playersByClub = playersByClub;
     }
 
     @Override

@@ -1,14 +1,18 @@
 package ua.lviv.iot.model;
 
+
 import javax.persistence.*;
+import java.util.List;
+import java.util.List;
 
 @Entity
-@Table(name = "add_company", schema = "lab6", catalog = "")
+@Table(name = "add_company", schema = "lab6")
 public class AddCompanyEntity {
     private String companyName;
     private Double budget;
     private String industry;
     private String counry;
+
 
     @Id
     @Column(name = "company_name")
@@ -49,6 +53,23 @@ public class AddCompanyEntity {
     public void setCounry(String counry) {
         this.counry = counry;
     }
+
+
+    @ManyToMany
+    @JoinTable(name = "playerscompanies", schema = "lab6",
+            joinColumns = @JoinColumn(name = "company_name", referencedColumnName = "company_name", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "player_id", referencedColumnName = "player_id", nullable = false))
+    private List<FootballPlayerEntity> players;
+
+    public List<FootballPlayerEntity> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<FootballPlayerEntity> players) {
+        this.players = players;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {

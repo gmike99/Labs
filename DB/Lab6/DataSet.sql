@@ -129,7 +129,6 @@ WHERE last_name = old_last_name_in AND first_name = old_first_name_in; SET msg =
 ELSE SET msg = 'No such player';
 END IF;
 SELECT msg AS message;
-
 END //
 
 DELIMITER ;
@@ -182,4 +181,12 @@ alter table football_player add column player_id int;
 alter table football_player add unique(player_id);
 
 drop table playerscompanies;-- CALL update_football_club('Popov', 'Daniil');
+
+
+alter table football_player alter player_id set identity(1, 1);
+
+alter table playerscompanies drop foreign key player_id;
+ALTER TABLE football_player MODIFY player_id INTEGER NOT NULL AUTO_INCREMENT;
+
+
 
