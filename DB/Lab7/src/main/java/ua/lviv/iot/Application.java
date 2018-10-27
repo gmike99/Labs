@@ -1,34 +1,23 @@
 package ua.lviv.iot;
 
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import ua.lviv.iot.model.AddCompanyEntity;
+import ua.lviv.iot.model.FootballClubEntity;
 import ua.lviv.iot.model.FootballPlayerEntity;
 
-import java.sql.*;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
 import java.util.Scanner;
 
 public class Application {
 
     private static SessionFactory mSessionFactory;
 
-    //------------------------------------------------------------
-
-    private static final String url =
-            "jdbc:mysql://localhost:3306/lab6?serverTimezone=UTC&useSSL=false";
-    private static final String user = "root";
-    private static final String password = "admin";
-
-    private static Connection connection = null;
-    private static Statement statement = null;
-    private static ResultSet rs = null;
-
-    private static Session mSession = null;
-
-    //-------------------------------------------------------------
 
     static {
         try { // Create the SessionFactory from hibernate.cfg.xml
@@ -42,52 +31,199 @@ public class Application {
         return mSessionFactory.openSession(); //return opened session
     }
 
-    public static void main(String args[]) {
-
-//        mSession = getSession();
-
+    public static void main(final String[] args) throws Exception {
+        // get opened session
+        Session session = getSession();
         try {
-            //This will load the MySQL driver, each DB has its own driver //
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            //Get a connection to database //
-            connection = DriverManager.getConnection(url, user, password);
-            // Create a statement
-            // Statements allow to issue SQL queries to the database
-            statement = connection.createStatement();
-
-
-        startApp();
-
-        } catch (ClassNotFoundException e) {
-            System.out.println("MySQL Driver is not loaded");
-
-        } catch (SQLException ex) {
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-
+            startApp();
+            System.out.println("\nFinish work!");
         } finally {
-            //close connection ,statement and resultset
-            if (rs != null) try {
-                rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } // ignore
-            if (statement != null) try {
-                statement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            session.close();
+            System.exit(0);
+        }
+    }
+
+    private static void readTableData(Session session) {
+        Query query = session.createQuery("from " + "FootballPlayerEntity");
+        System.out.format("\n--------------------------FootballPlayer----------------------------\n");
+        System.out.format("%-12s %-12s %-10s %-18s %-6s\n", "Last Name", "First Name",
+                "YearsOfXp", "Club Name", "ID");
+        for (Object obj: query.list()) {
+            FootballPlayerEntity playerEntity = (FootballPlayerEntity) obj;
+            System.out.format("%-12s %-12s %-10s %-18s %-6s\n", playerEntity.getLastName(),
+                    playerEntity.getFirstName(), playerEntity.getYearsOfExperience(),
+                    playerEntity.getClubByClub().getClubName(), playerEntity.getPlayerId());
+        }
+
+        query = session.createQuery("FROM " + "FootballClubEntity");
+        System.out.format("\n--------------------------FootballClub----------------------------\n");
+        System.out.format("%-18s %-16s %-10s %-12s\n", "ClubName", "ClubOwnerName",
+                "CoachName", "Country");
+        for (Object obj: query.list()) {
+            FootballClubEntity clubEntity = (FootballClubEntity) obj;
+            System.out.format("%-18s %-16s %-10s %-12s\n", clubEntity.getClubName(),
+                    clubEntity.getClubOwnerName(), clubEntity.getCoachName(),
+                    clubEntity.getCountry());
+        }
+
+        query = session.createQuery("FROM " + "AddCompanyEntity");
+        System.out.format("\n--------------------------AddCompany----------------------------\n");
+        System.out.format("%-18s %-16s %-14s %-12s\n", "CompanyName", "Budget",
+                "Industry", "Country");
+        for (Object obj: query.list()) {
+            AddCompanyEntity companyEntity = (AddCompanyEntity) obj;
+            System.out.format("%-18s %-16s %-14s %-12s\n", companyEntity.getCompanyName(),
+                    companyEntity.getBudget(), companyEntity.getIndustry(),
+                    companyEntity.getCounry());
+        }
+    }
+
+    private static void readPlayerOfCompany(Session session) {
+        Query query = session.createQuery("FROM " + "AddCompanyEntity ");
+        System.out.format("\n--------------------------AddCompany----------------------------\n");
+        System.out.format("%-18s %-12s\n", "CompanyName", "Players");
+        for (Object obj: query.list()) {
+            AddCompanyEntity companyEntity = (AddCompanyEntity) obj;
+            System.out.format("%-18s: ", companyEntity.getCompanyName());
+            for (FootballPlayerEntity player: companyEntity.getPlayers()) {
+                System.out.format("%s, %s;    ", player.getLastName(), player.getFirstName());
             }
-            if (connection != null) try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            System.out.println();
+        }
+    }
+
+    private static void readCompanyOfPlayer(Session session) {
+        Query query = session.createQuery("FROM " + "FootballPlayerEntity ");
+        System.out.format("\n--------------------------FootballPlayer----------------------------\n");
+        System.out.format("%-22s %-12s\n", "PlayerName", "Companies");
+        for (Object obj: query.list()) {
+            FootballPlayerEntity playerEntity = (FootballPlayerEntity) obj;
+            System.out.format("%-22s: ", playerEntity.getLastName() + " " + playerEntity.getFirstName());
+            for (AddCompanyEntity companyEntity: playerEntity.getCompanies()) {
+                System.out.format("%s;    ", companyEntity.getCompanyName());
+            }
+            System.out.println();
+        }
+    }
+
+    private static void insertCompany(Session session) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Input a new Company Name:  ");
+        String newCompany = input.next();
+
+        session.beginTransaction();
+        AddCompanyEntity companyEntity = new AddCompanyEntity();
+        companyEntity.setCompanyName(newCompany);
+        session.save(companyEntity);
+        session.getTransaction().commit();
+
+        System.out.println("Company inserted");
+    }
+
+    private static void updateCompany(Session session) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Input an old Company Name to update:  ");
+        String oldCompany = input.next();
+        System.out.println("Input a new Company Name to update:  ");
+        String newCompany = input.next();
+
+        AddCompanyEntity companyEntity = session.load(AddCompanyEntity.class, oldCompany);
+        if (companyEntity != null) {
+            session.beginTransaction();
+            Query query = session.createQuery("update AddCompanyEntity set companyName=:newName where companyName=:oldName");
+            query.setParameter("newName", newCompany);
+            query.setParameter("oldName", oldCompany);
+            int result = query.executeUpdate();
+            session.getTransaction().commit();
+            System.out.println("Company updated");
+        } else {
+            System.out.println("There is no such city");
+        }
+    }
+
+    private static void deleteCompany(Session session) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Input a new Company Name to delete:  ");
+        String deletedCompany = input.next();
+
+        AddCompanyEntity companyEntity = session.load(AddCompanyEntity.class, deletedCompany);
+
+        if (companyEntity != null) {
+            session.beginTransaction();
+            Query query = session.createQuery("delete AddCompanyEntity where companyName=:delCompany");
+            query.setParameter("delCompany", deletedCompany);
+            int result = query.executeUpdate();
+            session.getTransaction().commit();
+            System.out.println("Company deleted");
+        } else {
+            System.out.println("There is no such company");
+        }
+    }
+
+    public static void insertPlayerscompaniesWithProcedure(Session session) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("\nInput PersonID: ");
+        Integer personId = input.nextInt();
+        System.out.println("Input Company Name: ");
+        String companyName = input.next();
+
+        //from JPA 2.1
+        StoredProcedureQuery query = session
+                .createStoredProcedureQuery("insert_playerscompanies")
+                .registerStoredProcedureParameter("player_id_in", Integer.class, ParameterMode.IN)
+                .registerStoredProcedureParameter("company_name", String.class, ParameterMode.IN)
+                .setParameter("player_id_in", personId)
+                .setParameter("company_name", companyName);
+        query.execute();
+        String str = (String) query.getResultList().get(0);
+        System.out.println(str);
+        System.out.println("executed");
+        if (str.equals("OK")) {
+            Query query2 = session.createQuery("from " + "FootballPlayerEntity ");
+            for (Object obj : query2.list()) {
+                session.refresh(obj);
+            }
+            query2 = session.createQuery("from " + "AddCompanyEntity ");
+            for (Object obj : query2.list()) {
+                session.refresh(obj);
+            }
+        }
+    }
+
+    public static void deletePlayercompanyRelationShip(Session session) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("\nInput PersonID: ");
+        Integer personId = input.nextInt();
+        System.out.println("Input Company Name: ");
+        String companyName = input.next();
+
+        //from JPA 2.1
+        StoredProcedureQuery query = session
+                .createStoredProcedureQuery("delete_playerscompanies")
+                .registerStoredProcedureParameter("player_id_in", Integer.class, ParameterMode.IN)
+                .registerStoredProcedureParameter("company_name", String.class, ParameterMode.IN)
+                .setParameter("player_id_in", personId)
+                .setParameter("company_name", companyName);
+        query.execute();
+        String str = (String) query.getResultList().get(0);
+        System.out.println(str);
+        System.out.println("executed");
+        if (str.equals("OK")) {
+            Query query2 = session.createQuery("from " + "FootballPlayerEntity ");
+            System.out.println("just");
+            for (Object obj : query2.list()) {
+                session.refresh(obj);
+
+            }
+            query2 = session.createQuery("from " + "AddCompanyEntity ");
+            for (Object obj : query2.list()) {
+                session.refresh(obj);
             }
         }
     }
 
 
-    private static void startApp() throws SQLException {
+    private static void startApp() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Select your command: ");
         System.out.println("-----View--------: \n" +
@@ -107,36 +243,41 @@ public class Application {
                 "Clubs: d2\n" +
                 "Companies: d3\n" +
                 "-----Insert PlayerCompanies--------: \n" +
-                "ipc");
+                "ipc\n" +
+                "------Delete PlayerCompanies--------- \n" +
+                "dpc");
+
 
         String cmd = sc.next();
 
         if (cmd.equals("v1")) {
-            readPlayers(mSession);
+            readTableData(getSession());
         } else if (cmd.equals("v2")) {
-            readClubs();
+            readTableData(getSession());
         } else if (cmd.equals("v3")) {
-            readCompanies();
+            readTableData(getSession());
         } else if (cmd.equals("i1")) {
-            insertFootballPlayer();
+            insertCompany(getSession());
         } else if (cmd.equals("i2")) {
-            insertFootballClub();
+            insertCompany(getSession());
         } else if (cmd.equals("i3")) {
-            insertCompany();
+            insertCompany(getSession());
         } else if (cmd.equals("u1")) {
-            updateFootballPlayer();
+            updateCompany(getSession());
         } else if (cmd.equals("u2")) {
-            updateFootballClub();
+            updateCompany(getSession());
         } else if (cmd.equals("u3")) {
-            updateCompany();
+            updateCompany(getSession());
         } else if (cmd.equals("d1")) {
-            deleteFootballPlayer();
+            deleteCompany(getSession());
         } else if (cmd.equals("d2")) {
-            deleteFootballClub();
+            deleteCompany(getSession());
         } else if (cmd.equals("d3")) {
-            deleteCompany();
+            deleteCompany(getSession());
         } else if (cmd.equals("ipc")) {
-            callProcedureForInsertToPlayersCompanies();
+            insertPlayerscompaniesWithProcedure(getSession());
+        } else if (cmd.equals("dpc")) {
+            deletePlayercompanyRelationShip(getSession());
         } else {
             System.out.println("Invalid cmd, try again");
         }
@@ -150,270 +291,8 @@ public class Application {
         }
 
     }
-
-
-
-    private static void readPlayers(Session session) throws SQLException{
-
-        Query query = session.createQuery("FROM " + "FootballPlayerEntity ");
-        System.out.format("\nTable Person --------------------\n");
-        System.out.format("%-18s %-18s %-12s %-10s %-16s\n",
-                "Last Name", "First Name", "Years Of XP", "Player ID", "Club Name");
-        for (Object obj : query.list()) {
-            FootballPlayerEntity player = (FootballPlayerEntity) obj;
-            System.out.format("%3s %-12s %-12s\n", player.getLastName(), player.getFirstName(),
-                    player.getYearsOfExperience(), player.getPlayerId());
-            for (AddCompanyEntity addCompanyEntity : player.getCompanies()) {
-                System.out.format("\t\t%s // %s\n", addCompanyEntity.getCompanyName());
-            }
-        }
-
-    }
-
-    private static void readClubs() throws SQLException {
-        rs = statement.executeQuery("SELECT * FROM football_club");
-
-        //Process the result set
-        System.out.format("\n---------------------Table FootballClub --------------------\n");
-        System.out.format("%-20s %-16s %-16s %-16s\n", "Club Name", "Club Owner Name", "Coach Name", "Country");
-        while (rs.next()) {
-            String clubName = rs.getString("club_name");
-            String clubOwnerName = rs.getString("club_owner_name");
-            String coachName = rs.getString("coach_name");
-            String country = rs.getString("country");
-            // Simply Print the results
-            System.out.format("%-20s %-16s %-16s %-16s\n", clubName, clubOwnerName, coachName, country);
-        }
-    }
-
-    private static void readCompanies() throws SQLException {
-
-        rs = statement.executeQuery("SELECT * FROM add_company");
-
-        //Process the result set
-        System.out.format("\n-------------------Table Company--------------------\n");
-        System.out.format("%-16s %-16s %-16s %-16s\n", "Name", "Budget", "Industry", "Country");
-        while (rs.next()) {
-            String companyName = rs.getString("company_name");
-            double budget = rs.getDouble("budget");
-            String industry = rs.getString("industry");
-            String country = rs.getString("counry");
-            // Simply Print the results
-            System.out.format("%-16s %-16f %-16s %-16s\n", companyName, budget, industry, country);
-        }
-
-    }
-
-
-    private static void insertFootballPlayer() throws SQLException {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Input a player Last Name: ");
-        String lastName = input.next();
-        System.out.println("Input a player First Name: ");
-        String firstName = input.next();
-        System.out.println("Input a player Experience: ");
-        int exp = input.nextInt();
-        System.out.println("Input a player Club: ");
-        String club = input.next();
-
-        // 3. executing SELECT query
-        //   PreparedStatements can use variables and are more efficient
-        PreparedStatement preparedStatement;
-        preparedStatement = connection.prepareStatement("INSERT INTO football_player VALUES (?, ?, ? , ?)");
-        preparedStatement.setString(1, lastName);
-        preparedStatement.setString(2, firstName);
-        preparedStatement.setInt(3, exp);
-        preparedStatement.setString(4, club);
-        int n = preparedStatement.executeUpdate();
-        System.out.println("Count rows that inserted: " + n);
-
-    }
-
-    private static void insertFootballClub() throws SQLException {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Input a Club Name: ");
-        String name = input.next();
-        System.out.println("Input a Club Owner: ");
-        String owner = input.next();
-        System.out.println("Input a Club Coach: ");
-        String coach = input.next();
-        System.out.println("Input a Club Country: ");
-        String country = input.next();
-
-        // 3. executing SELECT query
-        //   PreparedStatements can use variables and are more efficient
-        PreparedStatement preparedStatement;
-        preparedStatement = connection.prepareStatement("INSERT INTO football_club VALUES (?, ?, ? , ?)");
-        preparedStatement.setString(1, name);
-        preparedStatement.setString(2, owner);
-        preparedStatement.setString(3, coach);
-        preparedStatement.setString(4, country);
-        int n = preparedStatement.executeUpdate();
-        System.out.println("Count rows that inserted: " + n);
-
-    }
-
-    private static void insertCompany() throws SQLException {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Input a Company Name: ");
-        String name = input.next();
-        System.out.println("Input a Company Budget: ");
-        double budget = input.nextDouble();
-        System.out.println("Input a Company Industry: ");
-        String industry = input.next();
-        System.out.println("Input a Company Country: ");
-        String country = input.next();
-
-        // 3. executing SELECT query
-        //   PreparedStatements can use variables and are more efficient
-        PreparedStatement preparedStatement;
-        preparedStatement = connection.prepareStatement("INSERT INTO football_club VALUES (?, ?, ? , ?)");
-        preparedStatement.setString(1, name);
-        preparedStatement.setDouble(2, budget);
-        preparedStatement.setString(3, industry);
-        preparedStatement.setString(4, country);
-        int n = preparedStatement.executeUpdate();
-        System.out.println("Count rows that inserted: " + n);
-
-    }
-
-
-    private static void updateFootballPlayer() throws SQLException {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Input Last Name for the player you want to update: ");
-        String lastName = input.next();
-        System.out.println("Input First Name for the player you want to update: ");
-        String firstName = input.next();
-        System.out.println("Input new Last Name: ");
-        String newLastName = input.next();
-        System.out.println("Input new First Name: ");
-        String newFirstName = input.next();
-
-        CallableStatement callableStatement;
-        callableStatement = connection.prepareCall("{CALL update_football_player(?, ?, ?, ?)}");
-        callableStatement.setString(1,lastName);
-        callableStatement.setString(2, firstName);
-        callableStatement.setString(3, newLastName);
-        callableStatement.setString(4, newFirstName);
-        ResultSet rs = callableStatement.executeQuery();
-
-        while (rs.next()) {
-            String msg = rs.getString(1);
-            // Simply Print the results
-            System.out.format("\nResult: " + msg);
-        }
-    }
-
-    private static void updateFootballClub() throws SQLException {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Input name for the club you want to update: ");
-        String oldName = input.next();
-        System.out.println("Input new club name: ");
-        String newName = input.next();
-
-
-        CallableStatement callableStatement;
-        callableStatement = connection.prepareCall("{CALL update_football_club(?, ?)}");
-        callableStatement.setString(1,oldName);
-        callableStatement.setString(2, newName);
-        ResultSet rs = callableStatement.executeQuery();
-
-        while (rs.next()) {
-            String msg = rs.getString(1);
-            // Simply Print the results
-            System.out.format("\nResult: " + msg);
-        }
-    }
-
-
-    private static void updateCompany() throws SQLException {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Input name for the company you want to update: ");
-        String oldName = input.next();
-        System.out.println("Input new company name: ");
-        String newName = input.next();
-
-
-        CallableStatement callableStatement;
-        callableStatement = connection.prepareCall("{CALL update_company(?, ?)}");
-        callableStatement.setString(1,oldName);
-        callableStatement.setString(2, newName);
-        ResultSet rs = callableStatement.executeQuery();
-
-        while (rs.next()) {
-            String msg = rs.getString(1);
-            // Simply Print the results
-            System.out.format("\nResult: " + msg);
-        }
-    }
-
-    private static void deleteFootballPlayer() throws SQLException {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Input a last name of player to delete: ");
-        String lastName = input.next();
-        System.out.println("Input a first name of player to delete: ");
-        String firstName = input.next();
-
-
-        //PreparedStatements can use variables and are more efficient
-        PreparedStatement preparedStatement;
-        preparedStatement = connection.prepareStatement("DELETE FROM football_player WHERE last_name=? AND first_name=?");
-        preparedStatement.setString(1, lastName);
-        preparedStatement.setString(2, firstName);
-        int n = preparedStatement.executeUpdate();
-        System.out.println("Count rows that deleted: " + n);
-    }
-
-    private static void deleteFootballClub() throws SQLException {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Input a name of club to delete: ");
-        String name = input.next();
-
-        //PreparedStatements can use variables and are more efficient
-        PreparedStatement preparedStatement;
-        preparedStatement = connection.prepareStatement("DELETE FROM football_club WHERE club_name=?");
-        preparedStatement.setString(1, name);
-        int n = preparedStatement.executeUpdate();
-        System.out.println("Count rows that deleted: " + n);
-    }
-
-    private static void deleteCompany() throws SQLException {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Input a name of club to delete: ");
-        String name = input.next();
-
-
-
-        //PreparedStatements can use variables and are more efficient
-        PreparedStatement preparedStatement;
-        preparedStatement = connection.prepareStatement("DELETE FROM add_company WHERE company_name=?");
-        preparedStatement.setString(1, name);
-        int n = preparedStatement.executeUpdate();
-        System.out.println("Count rows that deleted: " + n);
-    }
-
-    private static void callProcedureForInsertToPlayersCompanies() throws SQLException {
-        Scanner input = new Scanner(System.in);
-        System.out.println("\nInput Last Name For Player: ");
-        String lastName = input.next();
-        System.out.println("Input First Name For Player: ");
-        String firstName = input.next();
-        System.out.println("Input Company Name: ");
-        String companyName = input.next();
-
-        CallableStatement callableStatement;
-        callableStatement = connection.prepareCall("{CALL insert_playerscompanies(?, ?, ?)}");
-        callableStatement.setString(1, lastName);
-        callableStatement.setString(2, firstName);
-        callableStatement.setString(3, companyName);
-        ResultSet rs = callableStatement.executeQuery();
-
-        while (rs.next()) {
-            String msg = rs.getString(1);
-            // Simply Print the results
-            System.out.format("\nResult: " + msg);
-        }
-    }
-
 }
+
+
+
 

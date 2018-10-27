@@ -2,18 +2,18 @@ package ua.lviv.iot.model;
 
 import javax.persistence.*;
 import java.util.List;
+import ua.lviv.iot.model.FootballPlayerEntity;
 
 @Entity
-@Table(name = "football_club", schema = "lab6")
+@Table(name = "football_club", schema = "lab7")
 public class FootballClubEntity {
     private String clubName;
     private String clubOwnerName;
     private String coachName;
     private String country;
-    private List<FootballPlayerEntity> playersByClub;
 
     @Id
-    @Column(name = "club_name")
+    @Column(name = "club_name", nullable = false, length = 50)
     public String getClubName() {
         return clubName;
     }
@@ -23,7 +23,7 @@ public class FootballClubEntity {
     }
 
     @Basic
-    @Column(name = "club_owner_name")
+    @Column(name = "club_owner_name", nullable = true, length = 50)
     public String getClubOwnerName() {
         return clubOwnerName;
     }
@@ -33,7 +33,7 @@ public class FootballClubEntity {
     }
 
     @Basic
-    @Column(name = "coach_name")
+    @Column(name = "coach_name", nullable = true, length = 50)
     public String getCoachName() {
         return coachName;
     }
@@ -43,7 +43,7 @@ public class FootballClubEntity {
     }
 
     @Basic
-    @Column(name = "country")
+    @Column(name = "country", nullable = true, length = 50)
     public String getCountry() {
         return country;
     }
@@ -51,6 +51,8 @@ public class FootballClubEntity {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    private List<FootballPlayerEntity> playersByClub;
 
     @OneToMany(mappedBy = "clubByClub")
     public List<FootballPlayerEntity> getPlayersByClub() {

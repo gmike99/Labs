@@ -18,7 +18,7 @@ if __name__=='__main__':
     Fa = F(a)
     Fb = F(b)
     for i in range(1, n-1):
-        Integral = Integral + F(x)
+        Integral += F(x)
         x += h
 
     Integral = h * ((Fa + Fb)/2 + Integral)

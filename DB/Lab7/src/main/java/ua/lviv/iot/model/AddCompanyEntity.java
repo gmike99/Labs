@@ -1,21 +1,18 @@
 package ua.lviv.iot.model;
 
-
 import javax.persistence.*;
-import java.util.List;
 import java.util.List;
 
 @Entity
-@Table(name = "add_company", schema = "lab6")
+@Table(name = "add_company", schema = "lab7")
 public class AddCompanyEntity {
     private String companyName;
     private Double budget;
     private String industry;
     private String counry;
 
-
     @Id
-    @Column(name = "company_name")
+    @Column(name = "company_name", nullable = false, length = 50)
     public String getCompanyName() {
         return companyName;
     }
@@ -25,7 +22,7 @@ public class AddCompanyEntity {
     }
 
     @Basic
-    @Column(name = "budget")
+    @Column(name = "budget", nullable = true, precision = 0)
     public Double getBudget() {
         return budget;
     }
@@ -35,7 +32,7 @@ public class AddCompanyEntity {
     }
 
     @Basic
-    @Column(name = "industry")
+    @Column(name = "industry", nullable = true, length = 50)
     public String getIndustry() {
         return industry;
     }
@@ -45,7 +42,7 @@ public class AddCompanyEntity {
     }
 
     @Basic
-    @Column(name = "counry")
+    @Column(name = "counry", nullable = true, length = 50)
     public String getCounry() {
         return counry;
     }
@@ -55,12 +52,12 @@ public class AddCompanyEntity {
     }
 
 
-    @ManyToMany
-    @JoinTable(name = "playerscompanies", schema = "lab6",
-            joinColumns = @JoinColumn(name = "company_name", referencedColumnName = "company_name", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "player_id", referencedColumnName = "player_id", nullable = false))
     private List<FootballPlayerEntity> players;
 
+    @ManyToMany
+    @JoinTable(name = "playerscompanies", schema = "lab7",
+            joinColumns = @JoinColumn(name = "company_name", referencedColumnName = "company_name", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "player_id", referencedColumnName = "player_id", nullable = false))
     public List<FootballPlayerEntity> getPlayers() {
         return players;
     }
@@ -68,7 +65,6 @@ public class AddCompanyEntity {
     public void setPlayers(List<FootballPlayerEntity> players) {
         this.players = players;
     }
-
 
 
     @Override
