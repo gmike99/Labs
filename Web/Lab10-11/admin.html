@@ -1,0 +1,85 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="lib/bootstrap-grid.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/admin.css" />
+    <link rel="stylesheet" href="css/media.css">
+</head>
+<body>
+<header>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-10">
+                <nav class="hidden">
+                    <ul>
+                        <li><a href="index.html">Main</a></li>
+                        <li class="menu-matches">
+                            <a href="">Matches</a>
+                            <ul>
+                                <li><a href="match-calendar.html">Match Calendar</a></li>
+                                <li><a href="">Next Match</a></li>
+                                <li><a href="">Raitings</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="fans.html">Fans</a></li>
+                        <li><a href="contacts.html">Contacts</a></li>
+                        <li><a href="admin.html">Admin</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-2">
+                <div id="burger"></div>
+                <img class = "logo-top" src="img/fin-logo.png" alt="logo">
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="admin-image">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3>Add an article:</h3>
+                <div class="form-div">
+                    <form action="">
+                        <input type="file" accept="image/*" id="upload">
+                        <label for="upload">
+                            <div class="img-plc">
+                                <img src="img/image-placeholder.png" alt="img placeholder">
+                            </div>
+                        </label>
+                        <div class="txt">
+                            <div class="top-input">
+                                <input type="text" id="title" placeholder="Title..">
+                                <input type="text" id="description" placeholder="Description..">
+                            </div>
+                            <textarea name="news body" id="news_body" placeholder="news goes here.."></textarea>
+                        </div>
+                        <button class="btn" type="button">submit</button>
+                    </form>    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Made by Michael Gursky</p>
+                </div>
+            </div>
+        </div>
+</footer>
+    
+    <script src="js/burger.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

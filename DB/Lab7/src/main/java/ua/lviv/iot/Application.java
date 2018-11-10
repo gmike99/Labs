@@ -10,6 +10,7 @@ import ua.lviv.iot.model.AddCompanyEntity;
 import ua.lviv.iot.model.FootballClubEntity;
 import ua.lviv.iot.model.FootballPlayerEntity;
 
+
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 import java.util.Scanner;
@@ -35,7 +36,7 @@ public class Application {
         // get opened session
         Session session = getSession();
         try {
-            startApp();
+            readPlayerOfCompany(session);
             System.out.println("\nFinish work!");
         } finally {
             session.close();

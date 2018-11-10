@@ -2,19 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="249d3f85-9558-4640-ac4e-c4d35dc35b93" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Lab00/Lab7.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c7f03eaf-fa5b-4b80-925a-7748c9034eec.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/src/ua/lviv/iot/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/src/ua/lviv/iot/config/SwaggerConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/src/ua/lviv/iot/domain/AddCompany.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/src/ua/lviv/iot/domain/FootballClub.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/src/ua/lviv/iot/domain/FootballPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ua/lviv/iot/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/lviv/iot/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/AddCompanyEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/AddCompanyEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/FootballClubEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/FootballClubEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/FootballPlayerEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/FootballPlayerEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/FootballPlayerEntityPK.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../NumericMethods/Lab4/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../NumericMethods/Lab4/script.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Web/Lab8/news.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Web/Lab8/news.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -126,26 +125,29 @@
     <session id="-628438186">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="7" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.21" value="1" />
           <entry key="project.open.time.28" value="1" />
           <entry key="project.open.time.31" value="1" />
+          <entry key="project.open.time.34" value="1" />
+          <entry key="project.open.time.41" value="1" />
           <entry key="project.open.time.46" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="8" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="1" />
           <entry key="iml" value="2" />
-          <entry key="java" value="14" />
+          <entry key="java" value="15" />
           <entry key="playerscompanies" value="1" />
           <entry key="properties" value="2" />
           <entry key="sql" value="2" />
-          <entry key="xml" value="2" />
+          <entry key="xml" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -153,27 +155,27 @@
           <entry key="CLASS" value="1" />
           <entry key="Database Element" value="1" />
           <entry key="IDEA_MODULE" value="2" />
-          <entry key="JAVA" value="14" />
+          <entry key="JAVA" value="15" />
           <entry key="Properties" value="2" />
           <entry key="SQL" value="1" />
           <entry key="Scratch" value="1" />
-          <entry key="XML" value="2" />
+          <entry key="XML" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1829" />
+          <entry key="java" value="1846" />
           <entry key="properties" value="9" />
           <entry key="txt" value="7" />
-          <entry key="xml" value="13" />
+          <entry key="xml" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1829" />
+          <entry key="JAVA" value="1846" />
           <entry key="PLAIN_TEXT" value="7" />
           <entry key="Properties" value="9" />
-          <entry key="XML" value="13" />
+          <entry key="XML" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -236,8 +238,29 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ua/lviv/iot/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="245" column="22" selection-start-line="245" selection-start-column="22" selection-end-line="245" selection-end-column="22" />
+            <state relative-caret-position="136">
+              <caret line="38" column="41" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="41" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/FootballPlayerEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" selection-start-line="4" selection-end-line="14" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -301,10 +324,10 @@
         <option value="$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/FootballPlayerEntityPK.java" />
         <option value="$PROJECT_DIR$/src/main/resources/hibernate.properties" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
         <option value="$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/AddCompanyEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/FootballPlayerEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/FootballClubEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
         <option value="$PROJECT_DIR$/src/main/java/ua/lviv/iot/Application.java" />
       </list>
     </option>
@@ -344,7 +367,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -378,11 +400,28 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="iot" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Lab7" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Lab7" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="iot" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Lab7" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Lab7" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -465,16 +504,20 @@
       <workItem from="1540631614852" duration="61000" />
       <workItem from="1540633244044" duration="11463000" />
       <workItem from="1540653557820" duration="1368000" />
+      <workItem from="1540722981731" duration="760000" />
+      <workItem from="1540806084573" duration="2533000" />
+      <workItem from="1540812042304" duration="406000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45974000" />
+    <option name="totallyTimeSpent" value="49673000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49388754" visible="true" weight="0.23071104" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49388754" visible="true" weight="0.24205749" />
       <window_info id="Structure" order="1" sideWeight="0.5032787" side_tool="true" weight="0.29727685" />
       <window_info id="Designer" order="2" />
       <window_info id="Favorites" order="3" sideWeight="0.50491804" side_tool="true" weight="0.21558245" />
@@ -549,9 +592,15 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/FootballPlayerEntityPK.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.properties" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/PlayerscompaniesEntity.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/FootballPlayerEntity.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/FootballClubEntity.java" />
+    <entry file="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/5.2.10.Final/hibernate-core-5.2.10.Final.jar!/org/hibernate/Session.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="181" column="30" selection-start-line="181" selection-start-column="30" selection-end-line="181" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab6.iml" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -559,15 +608,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataSet.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/5.2.10.Final/hibernate-core-5.2.10.Final.jar!/org/hibernate/Session.class">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/FootballPlayerEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="181" column="30" selection-start-line="181" selection-start-column="30" selection-end-line="181" selection-end-column="30" />
+        <state relative-caret-position="204">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="14" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab7.iml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ua/lviv/iot/model/AddCompanyEntity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -576,19 +632,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lab7.iml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lab6.iml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/0801911e-72a4-40d9-a4ab-d5252c008246/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataSet.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ua/lviv/iot/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="245" column="22" selection-start-line="245" selection-start-column="22" selection-end-line="245" selection-end-column="22" />
+        <state relative-caret-position="136">
+          <caret line="38" column="41" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

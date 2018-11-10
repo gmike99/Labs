@@ -1,0 +1,7 @@
+1. download node.js and mongodb(and add them to your path)
+2. in cmd, go to project directory.
+3. (I've installed npm (npm init), nodemon (npm install --save-dev nodemon),
+ express (npm install express --save), mongoose (npm install mongoose --save),
+ cors (npm install cors)
+4. commands "mongod" and "npm run start" in proj dir to start the server
+5. localhost port: 3000
