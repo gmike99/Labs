@@ -1,50 +1,35 @@
-'use strict'
-var news = null
-console.log('this is news');
-window.addEventListener('load', function() {
-    if (this.localStorage.getItem('news') === null) {
-        console.log('local storage is empty');
-    } else {
-        console.log('local storage is not empty');
-        news = JSON.parse(localStorage.getItem('news'));
-        
-        var parent = this.document.querySelector('.last-news .row');
-        var newArticle = createNewsInstance(news);
-        parent.appendChild(newArticle)
+'use strict';
 
+function getNews(news) {
+    if (isOnline()) {
+        if (arguments.length === 0) {
+            news = getItem('news', function (callbackNews) {
+                getNews(callbackNews);
+                deleteItem('news');
+            });
+            if (news == undefined) {
+                return
+            } else {
+                createNewsInstance(news);
+                deleteItem('news');
+            }
+        } else {
+            createNewsInstance(news);
+        }
     }
-});
+}
+
+let newsContainer = document.getElementsByClassName('news-container')[0];
+getNews();
 
 function createNewsInstance(news) {
-
-    var bootstrapWrapper = document.createElement('div');
-    bootstrapWrapper.classList.add('col-lg-3', 'col-md-4', 'col-sm-6', 'col-12');
-
-    // creating root element
-    var newDiv = document.createElement('div');
-    newDiv.className = 'news-instance';
-
-    // creating div for the image
-    var imgDiv = document.createElement('div');
-    imgDiv.className = 'news-image';
-    // creating image
-    var img = document.createElement('img');
-    img.src = 'img/history.jpg';
-    // adding img to img-div
-    imgDiv.appendChild(img);
-    newDiv.appendChild(imgDiv);
-    // creating header
-    var header = document.createElement('h2');
-    var txtNode = document.createTextNode(news.newsTitle);
-    header.appendChild(txtNode);
-    newDiv.appendChild(header);
-    // creating news txt
-    var newsText = document.createElement('p');
-    txtNode = document.createTextNode(news.newsText);
-    newsText.appendChild(txtNode);
-    newDiv.appendChild(newsText);
-
-    bootstrapWrapper.appendChild(newDiv);
-
-    return bootstrapWrapper;
-};
+  newsContainer.innerHTML += " <div class=\"col-lg-3 col-md-4 col-sm-6 col-12\">\n" +
+        "<div class=\"news-instance\">\n" +
+        "<div class=\"news-image\">\n" +
+        "<img src=\"img/history.jpg\" alt=\"news illustration\">\n" +
+        "</div>\n" +
+        "<h2>"+ news.titleText + "</h2>\n" +
+        "<p>" + news.descText +"</p>\n" +
+        "</div>\n" +
+        "</div>";
+}

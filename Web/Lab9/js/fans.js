@@ -1,75 +1,12 @@
-function isOnline() {
-    return window.navigator.onLine;
-};
-
-function sendToServer(obj) {
-    console.log(obj + ' saved in server!');
-};
-
-window.addEventListener('load', function() {
-    console.log('window event listener');
-    function updateOnlineStatus(event) {
-        console.log('updateOnline Status');
-        // add logic
-        if (event.type == 'online') {
-            if (localStorage.getItem('comments') == null) {
-                console.log('no item to load');
-            } else {
-                console.log('inside online: about to load')
-                var unsavedItem = localStorage.getItem('comments');
-                populateComment(unsavedItem);
-                sendToServer(unsavedItem)
-                localStorage.removeItem('comments')
-            }
-        } else {
-            console.log('You are offline now!');
-        };
-    }
-  
-    window.addEventListener('online',  updateOnlineStatus);
-    window.addEventListener('offline', updateOnlineStatus);
-});
+'use strict';
 
 
-
-
+console.log('this is common');
 
 var input = document.getElementById('comment-text-input');
 var commentSection = document.querySelector('.main .col-12');
 
-function populateComment(commentTxt) {
-    input = document.getElementById('comment-text-input');
-
-    // --------------- fill commentTxt with data ----------------
-    if (commentTxt === null) {
-        var fanCommentText = input.value;
-    } else {
-        var fanCommentText = commentTxt
-    };
-    // ------------------- end fill commentTxt with data -------------------
-    
-
-    // ------------------- manipulate saved data -----------------------
-    if (fanCommentText.trim() === '') {
-        console.log('invalid text');
-        input.style.border = '1px solid red';
-    } else {
-        // ----- show to user if online -------------
-        if (window.navigator.onLine) {
-            console.log('is online');
-            var newDiv = createNewFanComment(fanCommentText);
-            commentSection.appendChild(newDiv);
-        } else { // save to local storage if offline
-            console.log('save data');
-            saveData(fanCommentText);
-        };
-            
-        input.value = '';
-        input.style.border = '1px solid black';
-    };
-};
-
-function createNewFanComment(fanCommentText) {
+function createFansInstance(fanCommentText) {
     //selecting root element
     var newDiv = document.createElement('div');
     newDiv.className = 'fan-comment';
@@ -83,7 +20,7 @@ function createNewFanComment(fanCommentText) {
 
     //creating username
     var username = document.createElement('p');
-    username.className = 'username'
+    username.className = 'username';
     textNode = document.createTextNode('-Username');
     username.appendChild(textNode);
     newDiv.appendChild(username);
@@ -112,12 +49,61 @@ function createNewFanComment(fanCommentText) {
     commentDate.appendChild(textNode);
     newDiv.appendChild(commentDate);
 
-    return newDiv;
+    commentSection.appendChild(newDiv);
 }
 
-function saveData(obj) {
-    localStorage.setItem('comments', JSON.stringify(obj));
-    var retrievedObject = JSON.parse(localStorage.getItem('comments'));
-    console.log('comments: ', retrievedObject);
-};  
+function submitFans() {
+    console.log('on click happened');
+    input = document.getElementById('comment-text-input');
+    var fanCommentText = input.value;
+    if (fanCommentText === null) {
+        console.log('commentText == null');
+        return;
+    } else {
+        console.log('commentText != null');
+    }
+
+    if (fanCommentText === '') {
+        console.log('invalid text');
+        input.style.border = '1px solid red';
+    } else {
+        saveFans(fanCommentText);
+        getFans(fanCommentText);
+
+        input.value = '';
+        input.style.border = '1px solid black';
+    }
+    ;
+};
+
+function getFans(fansToShow) {
+    if (isOnline()) {
+        if (arguments.length === 0) {
+            var fans = getItem('fans', function (callbackFans) {
+                getFans(callbackFans);
+                deleteItem('fans');
+            });
+
+            if (fans == undefined) {
+                return
+            } else {
+                createFansInstance(fans);
+                deleteItem('fans');
+            }
+        } else {
+            createFansInstance(fansToShow);
+        }
+    }
+
+}
+
+function saveFans(fansToSend) {
+    if (isOnline()) {
+
+    } else {
+        addItem('fans', fansToSend);
+    }
+}
+
+getFans();
 

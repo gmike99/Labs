@@ -1,8 +1,4 @@
-'use strict'
-console.log('this is common');
 
-
-// -----------------------burger stuff --------------------------
 var burger = document.getElementById('burger');
 var navigation = document.getElementsByTagName('nav')[0];
 
@@ -13,4 +9,3 @@ burger.onclick = function () {
         navigation.classList.add('hidden');
     }
 };
-// ----------------------------end burger stuff --------------------------

@@ -1,46 +1,14 @@
-var useLocalStorage = false;
-
-'use strict'
-function isOnline() {
-    return window.navigator.onLine;
-};
+'use strict';
 
 console.log('this is admin');
 
-function saveData(obj) {
-    localStorage.setItem('news', JSON.stringify(obj));
-    if (useLocalStorage) {
-        var retrievedObject = JSON.parse(localStorage.getItem('news'));
+function saveNews(obj) {
+    if(isOnline()) {
+
+    } else {
+        addItem('news', obj);
     }
-    
-    console.log('saved to local storage');
-    console.log('news: ', retrievedObject);
 };  
-
-function sendToServer(obj) {
-    console.log(obj + ' saved in server!');
-};
-
-window.addEventListener('load', function() {
-    openIndexedDB();
-    function updateOnlineStatus(event) {
-        // add logic
-        if (event.type === 'online') {
-            if (localStorage.getItem('news') === null) {
-                console.log('no item to load')
-            } else {
-                var unsavedItem = localStorage.getItem('news');
-                sendToServer(unsavedItem)
-                localStorage.removeItem('news')
-            }
-        } else {
-
-        };
-    }
-  
-    window.addEventListener('online',  updateOnlineStatus);
-    window.addEventListener('offline', updateOnlineStatus);
-});
 
 
 // news submission -------------------------------------------------------
@@ -61,8 +29,8 @@ btn.onclick = function submitNews() {
 
     
         var newsObj = {
-            'newsTitle': titleText,
-            'newsDescription': descText,
+            'titleText': titleText,
+            'descText': descText,
             'newsText': newsText
         };
 
@@ -70,12 +38,7 @@ btn.onclick = function submitNews() {
             console.log('online!');
             sendToServer(newsObj);
         } else {
-            if (useLocalStorage) {
-                saveData(newsObj);
-            } else {
-                saveDataToIDB(newsObj);
-            }
-            
+            saveNews(newsObj);
             console.log('offline!');
         };
         
@@ -102,12 +65,3 @@ btn.onclick = function submitNews() {
     };
 
 };
-// ----------------------------------------------------------------------
-
-
-// garbage
-
-// var input = document.getElementById('comment-text-input');
-// var clickButton = document.getElementById('sbm-button');
-// const commentSection = document.querySelector('.main .col-12');
-

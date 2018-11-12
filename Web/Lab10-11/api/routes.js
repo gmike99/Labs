@@ -7,7 +7,6 @@ module.exports = function(app) {
     app.use(cors());
     app.options('*', cors());
 
-    // Routes
     app.route('/fans')
         .get(controllers.getAllFans)
         .post(controllers.addFans);
