@@ -46,7 +46,6 @@ def solve():
     visited_vertices = set()
     candidate_dict = OrderedDict()
     for start_edge in start_edges:
-        print('a')        
         for accepted_diff in range(0, max_diff+1):
             current_vertex = start_edge.end
             candidate_dict.clear()
@@ -88,8 +87,6 @@ def solve():
 
                     cur_min = streak_min - buffer
                     cur_max = streak_max + buffer
-                    # print(cur_min)
-                    # print(cur_max)
                     continue
                 except IndexError:
                     try:
@@ -101,13 +98,12 @@ def solve():
                     except IndexError:
                         break
             else:
-                # if accepted_diff == 24: print(start_edge)
                 best_diff_list.append(accepted_diff)
                 break
 
             candidate_dict.clear()
 
-    return best_diff_list           
+    return min(best_diff_list)           
 
     
 if __name__ == '__main__':
