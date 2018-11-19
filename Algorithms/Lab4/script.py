@@ -42,7 +42,8 @@ def solve():
     start_edges = [edge for edge in edge_list if edge.start == 0]
     visited = []
     streak_weights = []
-
+    print(max_weight)
+    print(min_weight)
     visited_vertices = set()
     candidate_dict = OrderedDict()
     for start_edge in start_edges:
@@ -70,7 +71,8 @@ def solve():
                 
                 try:
                     candidate_edge = accepted_neighbors.pop()   
-                        
+                    
+
                     visited.append(candidate_edge) 
                     visited_vertices.add(current_vertex)
                     current_vertex = candidate_edge.end
@@ -103,7 +105,7 @@ def solve():
 
             candidate_dict.clear()
 
-    return min(best_diff_list)           
+    return best_diff_list           
 
     
 if __name__ == '__main__':
