@@ -31,15 +31,20 @@ def solve(width):
     condition = True
     found_list = []
     while condition:
-
+        if SOLVED[width-1] == 0:
+            string = string + work_str
+            del str_iter
         if equals_binary(string):
             found_list.append(string)
 
         try:
             string = string + next(str_iter)
-        except StopIteration:
+        except:
             break
         condition = is_present(string)
+
+    if not found_list:
+        return -1
 
     min_found = SOLVED[width-1] + 1
     for found in found_list:
@@ -84,3 +89,4 @@ if __name__ == '__main__':
         BINARY_LIST.extend(get_binary())
         solve(len(BINARY_STRING)+1)
         print(SOLVED[len(BINARY_STRING)])
+    print(BINARY_LIST)
