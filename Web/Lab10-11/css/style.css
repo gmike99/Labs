@@ -1,0 +1,190 @@
+body {
+    margin: 0;
+}
+  
+@keyframes logo-fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes menu-reveal {
+    from {padding-top: 0;}
+    to {color: 20px;}
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #030B16;
+    z-index: 100;
+}
+
+nav {
+    display: block;
+    width: 80%;
+    margin: auto;
+    transition: 0.3s;
+}
+
+nav.hidden {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+
+    display: inline-block;
+}
+
+nav ul li {
+    text-align: center;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    width: 120px;
+    display: inline-block;
+    padding: 20px 0;
+    border-bottom: 2px solid transparent;
+    animation: menu-reveal 1.5s;
+}
+
+nav ul li a:hover {
+    background-color: #162232;
+    border-bottom: 2px solid #ae1e18;   
+}   
+
+nav .menu-matches {
+    position: relative; 
+}
+nav .menu-matches ul {
+    position: absolute; top:60px; left: 0;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+nav .menu-matches ul li {
+    display: block;
+}
+
+nav .menu-matches:hover ul, nav .menu-matches ul:hover {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.logo-top {
+    margin-top: 5px;
+    width: 180px;
+    height: 50px;
+    float: right;
+    animation: logo-fadeIn 1.5s;
+}
+
+#burger {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 50px;
+    height: 50px;
+    background-image: url("../img/burger.svg");
+    cursor: pointer;
+
+    display: none;
+}
+
+.main {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main .col-12 {
+    padding: 0;
+}
+
+.team-picture {
+    margin-top: 60px;
+    height: 700px;
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2 {
+    text-align: center;
+    margin: 0 0 30px;
+    text-transform: uppercase;
+}
+
+p {
+    line-height: 1.5em;
+    text-indent: 20px;
+    font-family: Candara, serif;
+}
+
+
+.history {
+    padding: 90px 0;
+    background-color: #efefef
+}
+.history img {
+    width: 300px;
+    height: 255px;
+    margin-right: 50px;
+    margin-left: 25px;
+    margin-bottom: 25px;
+    float: right;
+    border-radius: 8%;
+}
+
+.history .wrap p {
+    margin-left: 50px;
+    padding-right: 50px;
+}
+
+.victory {
+    display: block;
+    width: 100%;
+    padding: 60px 0;
+    background-color: #efefef;
+}
+.victory img {
+    width: 385px;
+    height: 255px;
+    float: left;
+    margin-left: 50px;
+    margin-right: 25px; 
+    border-radius: 8%;
+}
+
+.victory .wrap p {
+    padding-right: 50px;
+    padding-left: 50px; 
+}
+
+footer {
+    background-color: #162232; 
+    color: white;
+    padding: 20px 0 20px 0;
+    width: 100%;
+    text-align: center;
+}
+
